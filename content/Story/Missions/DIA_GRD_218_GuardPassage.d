@@ -2,11 +2,8 @@
 //					EXIT 
 // **************************************
 /*
-	#Bugfix: This NPC has already assigned another exit dialog via
-		B_AssignAmbientInfos > B_AssignAmbientInfos_grd_7 > Info_grd_7_EXIT(C_INFO)
 
-	Grd_218_Gardist.NpcType == npctype_guard
-	Grd_218_Gardist.voice == 7
+#Bugfix #3 DIA_Grd_218_Exit commented out, this NPC has 'exit' dialogue already assigned through B_AssignAmbientInfos > B_AssignAmbientInfos_grd_7 > Info_grd_7_EXIT (Grd_218_Gardist.NpcType == npctype_guard, Grd_218_Gardist.voice == 7)
 	
 instance DIA_Grd_218_Exit(C_INFO)
 {
