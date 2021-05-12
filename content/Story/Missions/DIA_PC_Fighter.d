@@ -184,10 +184,9 @@ instance DIA_Gorn_HutFree(C_INFO)
 
 func int DIA_Gorn_HutFree_Condition()
 {
-	if (Npc_KnowsInfo(hero,DIA_Shrike_GetLost))
-	//#Needs_Attention tento dialog je dostupny aj ked hrac nepokecal s Gornom
-	//Malo by stacit pridat podmienku na predchadzajuci dialog
-	//if (Npc_KnowsInfo(hero,DIA_Gorn_Hut) && Npc_KnowsInfo(hero,DIA_Shrike_GetLost))
+	//#Bugfix #12 Dialogue DIA_Gorn_HutFree where player can tell Gorn that Shrike is gone was available even when player didn't talk with Gorn about kicking Shrike our of hut.
+	//*if (Npc_KnowsInfo(hero,DIA_Shrike_GetLost))
+	if (Npc_KnowsInfo(hero,DIA_Gorn_Hut) && Npc_KnowsInfo(hero,DIA_Shrike_GetLost))
 	{
 		return 1;
 	};
