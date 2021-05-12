@@ -162,8 +162,7 @@ func void DIA_Gorn_Hut_Info()
 	Log_SetTopicStatus(CH1_ShrikesHut,LOG_RUNNING);
 //	B_LogEntry(CH1_ShrikesHut,"Gorn, the mercenary, told me that Shrike had taken a hut of the mercenaries without asking. Since I've asked Gorn, none of the mercenaries will interfere if I can 'convince' Shrike of getting another hut.");
 //	B_LogEntry(CH1_ShrikesHut,"Der Söldner Gorn erzählte mir, dass Shrike sich ohne zu Fragen eine Söldner-Hütte genommen hat. Da ICH Gorn gefragt habe, wird sich keiner der Söldner einmischen, wenn ich Shrike davon 'überzeugen' kann, sich eine andere Hütte zu suchen.");
-	//#Needs_Attention: tento zapis do dennika je napr. Neznasam zapisy do dennika :)
-	B_LogEntry(CH1_ShrikesHut,"Žoldák Gorn mi řekl, že Shrike bez dovolení zabral chatrč žoldáků. Požádal jsem Gorna, aby nikdo ze žoldáků nezasahoval, dokud 'nepřesvědčím' Shrika, aby si našel jinou chatrč.");
+	B_LogEntry(CH1_ShrikesHut,"Žoldák Gorn mi řekl, že Shrike bez dovolení zabral chatrč žoldáků. Protože jsem se narozdíl od něj zeptal Gorna, nikdo ze žoldáků nezasáhne, když zkusím Shrika 'přesvědčit', aby si našel jinou chatrč.");
 	Gorn_ShrikesHut = LOG_RUNNING;
 };
 
