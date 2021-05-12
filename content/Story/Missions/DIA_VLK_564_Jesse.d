@@ -127,8 +127,8 @@ instance DIA_Jesse_Mission(C_INFO)
 
 func int DIA_Jesse_Mission_Condition()
 {
-	//#Bugfix NPC_KnowsInfo incorrectly used with 'this' dialog instance DIA_Jesse_Mission - dialog option would never display
-	//if (Npc_KnowsInfo(hero,DIA_Jesse_Mission))
+	//#Bugfix #1 Dialogue condition uses NPC_KnowsInfo with its own dialogue instance DIA_Jesse_Mission - dialogue option would never display.
+	//*if (Npc_KnowsInfo(hero,DIA_Jesse_Mission))
 	if (Npc_KnowsInfo(hero,DIA_Jesse_Warn))
 	{
 		return 1;
@@ -253,17 +253,17 @@ func void DIA_Jesse_MisSuccess_Info()
 	Info_ClearChoices(DIA_Jesse_MisSuccess);
 //	Info_AddChoice(DIA_Jesse_MisSuccess,"WHAAAT? I spent 10 ore on a clue I knew about anyway?",DIA_Jesse_MisSuccess_Waaas);
 //	Info_AddChoice(DIA_Jesse_MisSuccess,"WAAAS?! Ich hab' 10 Erz ausgegeben für einen Tip, den ich sowieso schon kannte!?",DIA_Jesse_MisSuccess_Waaas);
-	Info_AddChoice(DIA_Jesse_MisSuccess,"COŽEEE?! Utratil jsem 10 nugetů za radu, kterého jsem ani nepotřeboval?",DIA_Jesse_MisSuccess_Waaas);
+	Info_AddChoice(DIA_Jesse_MisSuccess,"COŽEEE?! Utratil jsem 10 nugetů za radu, kterou jsem ani nepotřeboval?",DIA_Jesse_MisSuccess_Waaas);
 //	Info_AddChoice(DIA_Jesse_MisSuccess,"Yeah. You scratch my back, I'll scratch yours.",DIA_Jesse_MisSuccess_Ok);
 //	Info_AddChoice(DIA_Jesse_MisSuccess,"Genau. Eine Hand wäscht die andere...",DIA_Jesse_MisSuccess_Ok);
-	Info_AddChoice(DIA_Jesse_MisSuccess,"Tak. Ruka ruku myje...",DIA_Jesse_MisSuccess_Ok);
+	Info_AddChoice(DIA_Jesse_MisSuccess,"Přesně. Ruka ruku myje...",DIA_Jesse_MisSuccess_Ok);
 };
 
 func void DIA_Jesse_MisSuccess_Waaas()
 {
 //	AI_Output(other,self,"DIA_Jesse_MisSuccess_Waaas_15_00"); //WHAAAT? I spent 10 ore on a clue I knew about anyway?
 //	AI_Output(other,self,"DIA_Jesse_MisSuccess_Waaas_15_00"); //WAAAS?! Ich hab' 10 Erz ausgegeben für einen Tipp, den ich sowieso schon kannte!?
-	AI_Output(other,self,"DIA_Jesse_MisSuccess_Waaas_15_00"); //COŽEEE?! Utratil jsem 10 nugetů za radu, kterého jsem ani nepotřeboval?
+	AI_Output(other,self,"DIA_Jesse_MisSuccess_Waaas_15_00"); //COŽEEE?! Utratil jsem 10 nugetů za radu, kterou jsem ani nepotřeboval?
 //	AI_Output(self,other,"DIA_Jesse_MisSuccess_Waaas_03_01"); //Apparently.
 //	AI_Output(self,other,"DIA_Jesse_MisSuccess_Waaas_03_01"); //Sieht so aus.
 	AI_Output(self,other,"DIA_Jesse_MisSuccess_Waaas_03_01"); //Vypadá to tak.
