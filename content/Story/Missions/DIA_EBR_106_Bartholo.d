@@ -118,8 +118,10 @@ instance Info_Bartholo_Krautbote(C_INFO)
 };                       
 
 func int Info_Bartholo_Krautbote_Condition()
-{ 
-	if (Kalom_Krautbote == LOG_RUNNING)
+{
+	//Bugfix #14 Dialogue Info_Bartholo_Krautbote (oCInfo.permanent issue) was available even when player gave Bartholo 30 pcs of itmijoint_3 (player could give him again & again 30 pcs ore in exchange for 200 XP XP_WeedShipmentDelivered & 500 pcs ore)
+	//*if (Kalom_Krautbote == LOG_RUNNING)
+	if ((Kalom_Krautbote == LOG_RUNNING) && (Kalom_DeliveredWeed == FALSE))
 	{
 		return 1;
 	};
@@ -159,7 +161,8 @@ func void Info_Bartholo_Krautbote_Info()
 		B_LogEntry(CH1_KrautBote,"Bartholo mi dal za zásilku drogy z bažin 500 nugetů.");
 		B_GiveXP(XP_WeedShipmentDelivered);
 
-		Info_Bartholo_Krautbote.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje
+		//*Info_Bartholo_Krautbote.permanent = 0;
 	}
 	else
 	{
