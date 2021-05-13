@@ -365,9 +365,8 @@ instance DIA_Snaf_WhereNek(C_INFO)
 
 func int DIA_Snaf_WhereNek_Condition()
 { 
-	if (Snaf_Zutaten==LOG_RUNNING)
-	//#Bugfix dialog was not available if hero finished successfully mission
-	|| (Snaf_Zutaten==LOG_SUCCESS)
+	//#Bugfix #7 Dialogue DIA_Snaf_WhereNek was not available if player finished mission Snaf_Zutaten
+	if ((Snaf_Zutaten==LOG_RUNNING) || (Snaf_Zutaten==LOG_SUCCESS))
 	{
 		return 1;
 	};
