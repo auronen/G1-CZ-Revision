@@ -369,7 +369,7 @@ func void GUR_1201_CorKalom_JoinPSI_Info()
 			B_LogEntry(CH1_JoinPsi,"Dnes mě Cor Kalom jmenoval novicem. Byl jako obvykle nesnesitelný, ale konečně patřím k Bratrstvu Spáče z Tábora v bažinách.");
 //			B_LogEntry(GE_TraderPSI,"I'll get better NOVICE ARMOR from Baal Namib.");
 //			B_LogEntry(GE_TraderPSI,"Bessere NOVIZENRÜSTUNGEN bekomme ich von Baal Namib.");
-			B_LogEntry(GE_TraderPSI,"Od Baala Namiba dostanu lepší NOVICKOU ZBROJ.");
+			B_LogEntry(GE_TraderPSI,"Od Baal Namiba dostanu lepší NOVICKOU ZBROJ.");
 			Log_SetTopicStatus(CH1_JoinPsi,LOG_SUCCESS);
 			B_GiveXP(XP_BecomeNovice);
 
@@ -615,7 +615,9 @@ instance Info_Kalom_KrautboteBACK(C_INFO)
 
 func int Info_Kalom_KrautboteBACK_Condition()
 {
-	if (Kalom_DeliveredWeed)
+	//#Bugfix #13 DIA_GUR_1201_CorKalom.d Dialogue Info_Kalom_KrautboteBACK (oCInfo.permanent issue) was available even when player gave Cor Kalom 500 pcs of ore (player could give him again & again 500 pcs ore in exchange for 200 XP XP_WeedShipmentReported). Dialogue set Kalom_DrugMonopol to LOG_SUCCESS, while it should set KALOM_KRAUTBOTE to LOG_SUCCESS.
+	//*if (Kalom_DeliveredWeed)
+	if ((Kalom_DeliveredWeed) && (KALOM_KRAUTBOTE != LOG_SUCCESS))
 	{
 		return TRUE;
 	};
@@ -641,7 +643,8 @@ func void Info_Kalom_KrautboteBACK_Info()
 		B_GiveInvItems(hero,self,ItMiNugget, 500);
 		B_GiveXP(XP_WeedShipmentReported);
 
-		Info_Kalom_KrautboteBACK.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje
+		//*Info_Kalom_KrautboteBACK.permanent = 0;
 	}
 	else
 	{
