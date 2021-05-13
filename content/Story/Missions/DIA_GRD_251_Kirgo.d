@@ -178,11 +178,11 @@ func void Info_Kirgo_Charge_Beer()
 //	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_09"); //Falls du immer noch gegen mich kämpfen willst - sag mir Bescheid! Aber ich werd' dir nicht gerne die Fresse polieren.
 	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_09"); //Jestli chceš ještě pořád se mnou bojovat, dej mi vědět. Nebudu mít ale radost z toho, až ti zmaluju obličej.
 
-	//#Bugfix Kirgo si od hraca zobral pivo :)
-	//CreateInvItem(other,ItFoBeer);
-	//B_GiveInvItems(other,self,ItFoBeer,1);
-	CreateInvItem(self, ItFoBeer);
-	B_GiveInvItems(self, other, ItFoBeer, 1);
+	//#Bugfix #4 Kirgo does not give beer to player, script creates it in players inventory and moves to Kirgo.
+	//*CreateInvItem(other,ItFoBeer);
+	//*B_GiveInvItems(other,self,ItFoBeer,1);
+	CreateInvItem (hero, ItFoBeer);
+	AI_PlayerReceivedItems (ItFoBeer, 1);
 
 	self.npctype = npctype_FRIEND;
 
