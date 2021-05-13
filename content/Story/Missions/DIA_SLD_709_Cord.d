@@ -116,7 +116,9 @@ func void SLD_709_Cord_TRAIN_Info()
 //			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_07"); //Aber je weiter du fortschreitest, desto besser wird diese Fähigkeit.
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_07"); //Ale čím více budeš trénovat, tím větší šanci budeš mít.
 			B_GiveInvItems(hero,self,ItMiNugget,30);
-			SLD_709_Cord_TRAIN.permanent = 0;
+
+			//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+			//*SLD_709_Cord_TRAIN.permanent = 0;
 		};
 	}
 	else
@@ -144,8 +146,12 @@ instance SLD_709_Cord_TRAINAGAIN(C_INFO)
 
 func int SLD_709_Cord_TRAINAGAIN_Condition()
 { 
-	if (Npc_KnowsInfo(hero,SLD_709_Cord_TRAINOFFER))
-	&& (Npc_GetTalentSkill (hero,NPC_TALENT_1H) < 2)
+	//#Bugfix #17 SLD_709_Cord_TRAINAGAIN - player can skip lvl 1 training for 1H weapons and learn lvl 2 immediately
+	//*if (Npc_KnowsInfo(hero,SLD_709_Cord_TRAINOFFER))
+	//*&& (Npc_GetTalentSkill (hero,NPC_TALENT_1H) < 2)
+
+	if ((Npc_KnowsInfo (hero, SLD_709_Cord_TRAINOFFER))
+	&& (Npc_GetTalentSkill (hero, NPC_TALENT_1H) == 1))
 	{
 		return TRUE;
 	};
@@ -175,7 +181,9 @@ func void SLD_709_Cord_TRAINAGAIN_Info()
 //			AI_Output(self,other,"SLD_709_Cord_TRAINAGAIN_Info_14_05"); //Und wieder von vorne. Vergiss nicht, Übung macht den Meister. Also, geh jetzt und werde ein wahrer Meister des einhändigen Kampfes.
 			AI_Output(self,other,"SLD_709_Cord_TRAINAGAIN_Info_14_05"); //A znovu kupředu. Nezapomeň, cvičení dělá mistra. Tak běž a staň se mistrem jednoručních zbraní.
 			B_GiveInvItems(hero,self,ItMiNugget, 50);
-			SLD_709_Cord_TRAINAGAIN.permanent = 0;
+
+			//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+			//*SLD_709_Cord_TRAINAGAIN.permanent = 0;
 		};
 	}
 	else
