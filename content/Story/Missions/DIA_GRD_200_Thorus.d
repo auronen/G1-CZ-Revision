@@ -1295,7 +1295,8 @@ func void GRD_200_Thorus_ZWEIHAND1_Info()
 //		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_07"); //That should do to begin with. Have a practice.
 //		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_07"); //Das sollte erst einmal reichen. Übe das.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_07"); //To by mohlo pro začátek stačit. Trénuj!
-		GRD_200_Thorus_ZWEIHAND1.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*GRD_200_Thorus_ZWEIHAND1.permanent = 0;
 	};
 };  
 //-------------------------------------------------------------------------
@@ -1354,6 +1355,7 @@ func void GRD_200_Thorus_ZWEIHAND2_Info()
 //		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_09"); //The key to success is varying your stances and changing positions.
 //		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_09"); //Abwechslung in den Kampfbewegungen und Positionswechsel sind der Schlüssel zum Sieg.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_09"); //Změna postoje a úderů jsou klíčem k vítězství.
-		GRD_200_Thorus_ZWEIHAND2.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*GRD_200_Thorus_ZWEIHAND2.permanent = 0;
 	};
 };  

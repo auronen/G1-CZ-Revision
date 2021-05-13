@@ -758,7 +758,8 @@ func void Sld_700_Lee_ZWEIHAND1_Info()
 //		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_07"); //Das sollte erst einmal reichen. Übe das!
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_07"); //To by mohlo pro začátek stačit. Trénuj!
 
-		Sld_700_Lee_ZWEIHAND1.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*Sld_700_Lee_ZWEIHAND1.permanent = 0;
 	};
 };  
 //-------------------------------------------------------------------------
@@ -820,6 +821,7 @@ func void Sld_700_Lee_ZWEIHAND2_Info()
 //		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND2_Info_08_09"); //Abwechslung in den Kampfbewegungen und Positionswechsel sind der Schlüssel zum Sieg.
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND2_Info_08_09"); //Změna postoje a úderů jsou klíčem k vítězství.
 
-		Sld_700_Lee_ZWEIHAND2.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*Sld_700_Lee_ZWEIHAND2.permanent = 0;
 	};
 };  

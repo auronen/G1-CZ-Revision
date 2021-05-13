@@ -234,7 +234,7 @@ func void GUR_1202_CorAngar_WANNABETPL_Info()
 //		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_02"); //Du bist noch nicht bereit. Wenn du erfahrener geworden bist, werde ich dich aufnehmen.
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_02"); //Nejsi ještě připraven. Můžeš se k nám připojit, jakmile získáš víc zkušeností.
 		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po zmene guildy sa dialog rusi v condition funkcii
-		//GUR_1202_CorAngar_WANNABETPL.permanent = 1;
+		//*GUR_1202_CorAngar_WANNABETPL.permanent = 1;
 	}
 	else if (hero.level >= 10)
 	{
@@ -257,7 +257,7 @@ func void GUR_1202_CorAngar_WANNABETPL_Info()
 //		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_08"); //Gehe nun zu Gor Na Toth am Übungsplatz. Er wird dir deine neue Rüstung geben.
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_08"); //Teď jdi na cvičiště za Gor Na Tothem. Dá ti novou zbroj.
 		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po zmene guildy sa dialog rusi v condition funkcii
-		//GUR_1202_CorAngar_WANNABETPL.permanent = 0;
+		//*GUR_1202_CorAngar_WANNABETPL.permanent = 0;
 		Npc_SetTrueGuild(hero,GIL_TPL);
 		hero.guild = GIL_TPL;
 
@@ -319,7 +319,7 @@ func void GUR_1202_CorAngar_ZWEIHAND1_Info()
 		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_05"); //Klíčem úspěchu je soustředění. Soustředěná jednota těla a mysli.
 
 		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po nauceni skillu NPC_TALENT_2H sa dialog rusi v condition funkcii
-		//GUR_1202_CorAngar_ZWEIHAND1.permanent = 0;
+		//*GUR_1202_CorAngar_ZWEIHAND1.permanent = 0;
 
 		AI_StopProcessInfos(self);
 		B_PracticeCombat ("PSI_PATH_6_7");
@@ -380,7 +380,7 @@ func void GUR_1202_CorAngar_ZWEIHAND2_Info()
 		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_08"); //Využívej své umění obezřetně. A zapamatuj si: vyprovokovat boj znamená totéž, co v něm zemřít.
 
 		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po nauceni skillu NPC_TALENT_2H sa dialog rusi v condition funkcii
-		//GUR_1202_CorAngar_ZWEIHAND2.permanent = 0;
+		//*GUR_1202_CorAngar_ZWEIHAND2.permanent = 0;
 
 		AI_StopProcessInfos(self);
 		B_PracticeCombat ("PSI_PATH_6_7");

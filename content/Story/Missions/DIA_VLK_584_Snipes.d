@@ -149,7 +149,8 @@ func void VLK_584_Snipes_DEAL_2_Info()
 
 		B_GiveInvItems(hero,self,ItMiNugget,30);
 		B_GiveInvItems(self,hero,ItKe_OM_02,1);
-		VLK_584_Snipes_DEAL_2.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*VLK_584_Snipes_DEAL_2.permanent = 0;
 
 //		B_LogEntry(CH2_SnipesDeal,"I bought the key to the chest from Snipes! I wonder what Aaron is going to do when I tell him about it?"); 
 //		B_LogEntry(CH2_SnipesDeal,"Ich habe Snipes den Truhenschlüssel abgekauft! Wie Aaron wohl darauf reagieren wird, wenn ich ihm davon erzähle?"); 

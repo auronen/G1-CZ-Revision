@@ -138,7 +138,10 @@ func void KDF_402_Corristo_WANNBEKDF_Info()
 //		AI_Output(self,other,"KDF_402_Corristo_WANNBEKDF_Info_14_05"); //Dein Geist ist reif für die Aufnahme. Wenn du Magier werden willst, dann muss ich dich zuvor prüfen. Sag mir Bescheid, wenn du dich dieser Prüfung unterziehen willst.
 		AI_Output(self,other,"KDF_402_Corristo_WANNBEKDF_Info_14_05"); //Tvoje duše je vyzrálá a připravená se k nám přidat. Jestli se chceš stát mágem, musím tě nejdříve vyzkoušet. Řekni mi, až budeš připraven na zkoušku.
 		Corristo_KDFAufnahme = 1;
-		KDF_402_Corristo_WANNBEKDF.permanent = 0;
+		
+		//#Needs_Attention - zmena permanent nefunguje
+		//KDF_402_Corristo_WANNBEKDF.permanent = 0;
+
 		Info_ClearChoices(KDF_402_Corristo_WANNBEKDF);
 
 		Log_CreateTopic(GE_BecomeFiremage,LOG_NOTE);
@@ -628,7 +631,9 @@ func void KDF_402_Corristo_KREIS1_Info()
 //		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_09"); //Use the power of the runes to recognize yourself.
 //		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_09"); //Nutze die Kraft der Runen, um dich selber zu erkennen.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_09"); //Využij moc run k poznání sebe sama.
-		KDF_402_Corristo_KREIS1.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//KDF_402_Corristo_KREIS1.permanent = 0;
 	};
 };  
 //---------------------------------------------------------------------
@@ -685,7 +690,9 @@ func void KDF_402_Corristo_KREIS2_Info()
 //		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_08"); //Understand the situation, then you'll recognize the power of the runes.
 //		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_08"); //Erkenne die Situation, dann wirst du die Macht der Runen erkennen.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_08"); //Pokud porozumíš situaci, pak poznáš moc run.
-		KDF_402_Corristo_KREIS2.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//KDF_402_Corristo_KREIS2.permanent = 0;
 	};
 
 };  
@@ -739,7 +746,9 @@ func void KDF_402_Corristo_KREIS3_Info()
 //		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_07"); //Understand your path, then you'll recognize the power of the decision.
 //		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_07"); //Erkenne deinen Weg, dann wirst du die Macht der Entscheidung erkennen.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_07"); //Jakmile porozumíš své cestě, pak poznáš sílu rozhodnutí.
-		KDF_402_Corristo_KREIS3.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//KDF_402_Corristo_KREIS3.permanent = 0;
 	};
 
 };  
@@ -792,7 +801,9 @@ func void KDF_402_Corristo_KREIS4_Info()
 //		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_07"); //Understand the magic, then you'll discover the secret of power.
 //		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_07"); //Erkenne die Magie, dann wirst du das Geheimnis von Macht erkennen.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_07"); //Jakmile porozumíš magii, objevíš tajemství moci.
-		KDF_402_Corristo_KREIS4.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//KDF_402_Corristo_KREIS4.permanent = 0;
 	};
 };  
 /*------------------------------------------------------------------------
@@ -849,7 +860,9 @@ func void KDF_402_Corristo_HEAVYARMOR_Info()
 
 		B_GiveInvItems(hero,self,ItMinugget,VALUE_KDF_ARMOR_H);
 		AI_EquipBestArmor(hero);
-		KDF_402_Corristo_HEAVYARMOR.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje
+		//KDF_402_Corristo_HEAVYARMOR.permanent = 0;
 	};
 
 };  

@@ -177,7 +177,8 @@ func void GRD_262_Aaron_BLUFF_UGLY()
 
 	Aaron_lock = LOG_RUNNING;
 	Snipes_Deal = LOG_SUCCESS;
-	GRD_262_Aaron_BLUFF.permanent = 0;
+	//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+	//*GRD_262_Aaron_BLUFF.permanent = 0;
 
 //	B_LogEntry(CH2_SnipesDeal,"I lured Aaron away from the chest on the pretext that Ian wanted to see him. I hope he'll take it in good humor.");
 //	B_LogEntry(CH2_SnipesDeal,"Ich habe Aaron unter dem Vorwand, dass Ian ihn sehen will, von der Truhe weggelockt. Ich hoffe er hat etwas Humor.");

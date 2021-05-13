@@ -1221,7 +1221,7 @@ func void KDW_600_Saturas_KREIS1_Info()
 {
 //	AI_Output(other,self,"KDW_600_Saturas_KREIS1_Info_15_01"); //I am ready to enter the First Circle.
 //	AI_Output(other,self,"KDW_600_Saturas_KREIS1_Info_15_01"); //Ich bin bereit, in den ersten Kreis aufgenommen zu werden.
-	AI_Output(other,self,"KDW_600_Saturas_KREIS1_Info_15_01"); //Jsem připraven vstoupit do Pátého kruhu.
+	AI_Output(other,self,"KDW_600_Saturas_KREIS1_Info_15_01"); //Jsem připraven vstoupit do Prvního kruhu.
 
 	if (B_GiveSkill(other,NPC_TALENT_MAGE , 1, LPCOST_TALENT_MAGE_1))
 	{
@@ -1249,7 +1249,9 @@ func void KDW_600_Saturas_KREIS1_Info()
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_09"); //Use the power of the runes to recognize yourself.
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_09"); //Nutze die Kraft der Runen, um dich selber zu erkennen.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_09"); //Využij moc run k poznání sebe sama.
-		KDW_600_Saturas_KREIS1.permanent = 0;
+		
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*KDW_600_Saturas_KREIS1.permanent = 0;
 	};
 };  
 //---------------------------------------------------------------------
@@ -1308,7 +1310,9 @@ func void KDW_600_Saturas_KREIS2_Info()
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS2_Info_14_08"); //Understand the situation, then you'll recognize the power of the runes.
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS2_Info_14_08"); //Erkenne die Situation, dann wirst du die Macht der Runen erkennen.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS2_Info_14_08"); //Pokud porozumíš situaci, pak poznáš moc run.
-		KDW_600_Saturas_KREIS2.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*KDW_600_Saturas_KREIS2.permanent = 0;
 	};
 
 };  
@@ -1364,7 +1368,9 @@ func void KDW_600_Saturas_KREIS3_Info()
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS3_Info_14_07"); //Understand your path, then you'll recognize the power of the decision.
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS3_Info_14_07"); //Erkenne deinen Weg, dann wirst du die Macht der Entscheidung erkennen.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS3_Info_14_07"); //Jakmile porozumíš své cestě, pak poznáš sílu rozhodnutí.
-		KDW_600_Saturas_KREIS3.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*KDW_600_Saturas_KREIS3.permanent = 0;
 	};
 
 };  
@@ -1399,7 +1405,7 @@ func void KDW_600_Saturas_KREIS4_Info()
 {
 //	AI_Output(other,self,"KDW_600_Saturas_KREIS4_Info_15_01"); //I am ready to enter the Fourth Circle.
 //	AI_Output(other,self,"KDW_600_Saturas_KREIS4_Info_15_01"); //Ich bin bereit für den vierten der Kreise.
-	AI_Output(other,self,"KDW_600_Saturas_KREIS4_Info_15_01"); //Jsem připraven vstoupit do Pátého kruhu.
+	AI_Output(other,self,"KDW_600_Saturas_KREIS4_Info_15_01"); //Jsem připraven vstoupit do Čtvrtého kruhu.
 	if (B_GiveSkill(other,NPC_TALENT_MAGE , 4, LPCOST_TALENT_MAGE_4))
 	{
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS4_Info_14_02"); //You have completed the first three Circles. Now is the time for you to learn the secrets of magic.
@@ -1418,7 +1424,9 @@ func void KDW_600_Saturas_KREIS4_Info()
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS4_Info_14_07"); //Understand the magic, then you'll discover the secret of power.
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS4_Info_14_07"); //Erkenne die Magie, dann wirst du das Geheimnis von Macht erkennen.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS4_Info_14_07"); //Jakmile porozumíš magii, objevíš tajemství moci.
-		KDW_600_Saturas_KREIS4.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*KDW_600_Saturas_KREIS4.permanent = 0;
 	};
 };  
 /*------------------------------------------------------------------------
@@ -1473,7 +1481,9 @@ func void KDW_600_Saturas_KREIS5_Info()
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS5_Info_14_06"); //Expose your limits, then you'll recognize your true power.
 //		AI_Output(self,other,"KDW_600_Saturas_KREIS5_Info_14_06"); //Erkenne deine Grenzen, dann wirst du deine wahre Macht erkennen
 		AI_Output(self,other,"KDW_600_Saturas_KREIS5_Info_14_06"); //Poznej své možnosti, pak budeš znát svoji opravdovou moc.
-		KDW_600_Saturas_KREIS5.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*KDW_600_Saturas_KREIS5.permanent = 0;
 	};
 };  
 /*------------------------------------------------------------------------
@@ -1523,7 +1533,9 @@ func void KDW_600_Saturas_HEAVYARMOR_Info()
 //		AI_Output(self,other,"KDW_600_Saturas_HEAVYARMOR_Info_14_04"); //The time has come. You are worthy of wearing the high robe of Water.
 //		AI_Output(self,other,"KDW_600_Saturas_HEAVYARMOR_Info_14_04"); //Die Zeit ist gekommen. Du bist würdig, die hohe Robe des Wassers zu tragen.
 		AI_Output(self,other,"KDW_600_Saturas_HEAVYARMOR_Info_14_04"); //Nadešel tvůj čas. Jsi hoden nosit vznešené roucho Vody.
-		KDW_600_Saturas_HEAVYARMOR.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje
+		//*KDW_600_Saturas_HEAVYARMOR.permanent = 0;
 
 		B_GiveInvItems(hero,self,ItMinugget,VALUE_KDW_ARMOR_H);
 		CreateInvItem(hero,KDW_ARMOR_H);
