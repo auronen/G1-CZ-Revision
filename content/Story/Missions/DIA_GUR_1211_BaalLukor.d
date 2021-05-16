@@ -281,12 +281,14 @@ func void Info_BaalLukor_FIRSTWAIT_Info()
 //	AI_Output(self,other,"Info_BaalLukor_FIRSTWAIT_13_01"); //Hier geht es nicht weiter! Vielleicht bergen die Nischen hier Hinweise.
 	AI_Output(self,other,"Info_BaalLukor_FIRSTWAIT_13_01"); //Tudy nemůžeme pokračovat! Možná nám pomohou tyto výklenky.
 
-	/*
-	#Needs_Attention - toto sposobuje bug - kde Lukor prestane nasledovat hraca
-	 - ak hrac najprv ziska oba svitky a da ich Lukorovi, tak dole rutina sposobi, ze sa Lukor zasekne
-	*/
-	AI_StopProcessInfos(self);
-	Npc_ExchangeRoutine(self,"WaitInSideTunnelOne");
+	//#Bugfix #11 Info_BaalLukor_FIRSTWAIT/Info_BaalLukor_SECONDWAIT if player gave OrkParchmentOne/OrkParchmentTwo to Baal Lukor and Baal Lukor approached waypoints GRYD_040/GRYD_047 only after receiving item he would get stuck in waiting routine.
+	//*if (!Npc_HasItems(hero,OrkParchmentOne))
+	if (!Npc_HasItems(hero,OrkParchmentOne))
+	&& (!Npc_HasItems(self,OrkParchmentOne))
+	{
+		AI_StopProcessInfos(self);
+		Npc_ExchangeRoutine(self,"WaitInSideTunnelOne");
+	};
 };
 
 //**************************************************************************
@@ -371,12 +373,10 @@ func void Info_BaalLukor_SECONDWAIT_Info()
 //	AI_Output(self,other,"Info_BaalLukor_SECONDWAIT_13_01"); //Hmmm ... Dieser Stollen ist eine Sackgasse! Vielleicht findest du hier irgendwelche Hinweise, die uns weiterhelfen.
 	AI_Output(self,other,"Info_BaalLukor_SECONDWAIT_13_01"); //Hmmm... tenhle tunel je slepý! Ale možná tu najdeme nějaké znamení, které nám pomůže dál.
 
-	/*
-	#Needs_Attention - toto sposobuje bug - kde Lukor prestane nasledovat hraca
-	 - v dialogu Info_BaalLukor_SECONDSCROLL moze hrac dat Lukorovi OrkParchmentTwo (a teda plati podmienka dole, ze hrac item nema)
-	 - ak sa potom priblizi k waypointu GRYD_047 tak sa zmeni rutina na WaitInSideTunnelTwo a uz sa nepohne
-	*/
-	if (!Npc_HasItems(hero,OrkParchmentTwo)) 
+	//#Bugfix #10 Info_BaalLukor_FIRSTWAIT/Info_BaalLukor_SECONDWAIT if player gave OrkParchmentOne/OrkParchmentTwo to Baal Lukor and Baal Lukor approached waypoints GRYD_040/GRYD_047 only after receiving item he would get stuck in waiting routine.
+	//*if (!Npc_HasItems(hero,OrkParchmentTwo))
+	if (!Npc_HasItems(hero,OrkParchmentTwo))
+	&& (!Npc_HasItems(self,OrkParchmentTwo))
 	{ 
 		AI_StopProcessInfos(self);
 		Npc_ExchangeRoutine(self,"WaitInSideTunnelTwo");

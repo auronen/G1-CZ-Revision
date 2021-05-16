@@ -55,6 +55,8 @@ func void DIA_Graham_Hello_Info()
 //	B_LogEntry(GE_TraderOC,"The digger Graham sells maps left of the main gate.");
 //	B_LogEntry(GE_TraderOC,"Graham der Buddler verkauft Karten links vom Haupptor.");
 	//#Needs_Attention nalevo od hlavni brany? asi zalezi na tom ako sa na to clovek pozera, ked vstupis do tabora je napravo ... ked vychadzas nalavo :) idk
+	//#Bugfix #9 Log_CreateTopic function added to Graham's dialogue, without it log entry might not be visible.
+	Log_CreateTopic(GE_TraderOC,LOG_NOTE);
 	B_LogEntry(GE_TraderOC,"Kopáč Graham prodává mapy nalevo od hlavní brány.");
 };
 

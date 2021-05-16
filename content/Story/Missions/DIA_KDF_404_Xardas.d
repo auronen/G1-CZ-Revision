@@ -1255,9 +1255,14 @@ instance Info_Xardas_LOADSWORD09(C_INFO)
 };
 
 func int Info_Xardas_LOADSWORD09_Condition()
-{ 
-	if (EnteredTemple)
-	&& (Npc_GetTrueGuild(hero) == GIL_KDW)
+{
+	//#Bugfix #15 Dialogue Info_Xardas_LOADSWORD09 (oCInfo.permanent issue) was available even when player learnt NPC_TALENT_MAGE 6.
+	//*if (EnteredTemple)
+	//*&& (Npc_GetTrueGuild(hero) == GIL_KDW)
+	//*{ 
+	if ((EnteredTemple)
+	&& (Npc_GetTrueGuild (hero) == GIL_KDW)
+	&& (Npc_GetTalentSkill (hero, NPC_TALENT_MAGE) != 6))
 	{ 
 		return TRUE;
 	}; 
@@ -1299,7 +1304,8 @@ func void Info_Xardas_LOADSWORD09_Info()
 
 			hero.guild = GIL_DMB; 
 			Npc_SetTrueGuild(hero,GIL_DMB); 
-			Info_Xardas_LOADSWORD09.permanent = 0;
+			//#Needs_Attention - zmena permanent nefunguje
+			//*Info_Xardas_LOADSWORD09.permanent = 0;
 			AI_StopProcessInfos(self);
 		};
 	}

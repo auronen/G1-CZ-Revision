@@ -162,8 +162,7 @@ func void DIA_Gorn_Hut_Info()
 	Log_SetTopicStatus(CH1_ShrikesHut,LOG_RUNNING);
 //	B_LogEntry(CH1_ShrikesHut,"Gorn, the mercenary, told me that Shrike had taken a hut of the mercenaries without asking. Since I've asked Gorn, none of the mercenaries will interfere if I can 'convince' Shrike of getting another hut.");
 //	B_LogEntry(CH1_ShrikesHut,"Der Söldner Gorn erzählte mir, dass Shrike sich ohne zu Fragen eine Söldner-Hütte genommen hat. Da ICH Gorn gefragt habe, wird sich keiner der Söldner einmischen, wenn ich Shrike davon 'überzeugen' kann, sich eine andere Hütte zu suchen.");
-	//#Needs_Attention: tento zapis do dennika je napr. Neznasam zapisy do dennika :)
-	B_LogEntry(CH1_ShrikesHut,"Žoldák Gorn mi řekl, že Shrike bez dovolení zabral chatrč žoldáků. Požádal jsem Gorna, aby nikdo ze žoldáků nezasahoval, dokud 'nepřesvědčím' Shrika, aby si našel jinou chatrč.");
+	B_LogEntry(CH1_ShrikesHut,"Žoldák Gorn mi řekl, že Shrike bez dovolení zabral chatrč žoldáků. Protože jsem se narozdíl od něj zeptal Gorna, nikdo ze žoldáků nezasáhne, když zkusím Shrika 'přesvědčit', aby si našel jinou chatrč.");
 	Gorn_ShrikesHut = LOG_RUNNING;
 };
 
@@ -185,10 +184,9 @@ instance DIA_Gorn_HutFree(C_INFO)
 
 func int DIA_Gorn_HutFree_Condition()
 {
-	if (Npc_KnowsInfo(hero,DIA_Shrike_GetLost))
-	//#Needs_Attention tento dialog je dostupny aj ked hrac nepokecal s Gornom
-	//Malo by stacit pridat podmienku na predchadzajuci dialog
-	//if (Npc_KnowsInfo(hero,DIA_Gorn_Hut) && Npc_KnowsInfo(hero,DIA_Shrike_GetLost))
+	//#Bugfix #12 Dialogue DIA_Gorn_HutFree where player can tell Gorn that Shrike is gone was available even when player didn't talk with Gorn about kicking Shrike our of hut.
+	//*if (Npc_KnowsInfo(hero,DIA_Shrike_GetLost))
+	if (Npc_KnowsInfo(hero,DIA_Gorn_Hut) && Npc_KnowsInfo(hero,DIA_Shrike_GetLost))
 	{
 		return 1;
 	};

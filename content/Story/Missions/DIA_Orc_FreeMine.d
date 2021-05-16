@@ -763,17 +763,30 @@ instance Info_FreemineOrc_LOOKINGULUMULU(C_INFO)
 
 func int Info_FreemineOrc_LOOKINGULUMULU_Condition()
 {
-	//#Needs_Attention - toto je nespravna podmienka - dialog je dostupny, len ak nema hrac jazyk ohnivej jasterky a ma vsetko ostatne
-	if (!Npc_HasItems(hero,ItAt_Waran_01)
-	&& Npc_HasItems(hero,ItAt_Shadow_02)
-	&& Npc_HasItems(hero,ItAt_Swampshark_02)
-	&& Npc_HasItems(hero,ItAt_Troll_02)
-	&& Npc_KnowsInfo(hero,Info_FreemineOrc_FIREWARAN2)
-	&& Npc_KnowsInfo(hero,Info_FreemineOrc_SHADOWBEAST2)
-	&& Npc_KnowsInfo(hero,Info_FreemineOrc_SWAMPSHARK2)
-	&& Npc_KnowsInfo(hero,Info_FreemineOrc_TROLL2))
-	{
-		return TRUE;
+	//#Bugfix #10 Dialogue Info_FreemineOrc_LOOKINGULUMULU option would have been only available when player is missing firewarans tongue, dialogue condition changed - now available whenever player does not have any item. Also wont be available dialogue Info_FreemineOrc_EVERYULUMULU was told.
+	//*if (!Npc_HasItems(hero,ItAt_Waran_01)
+	//*&& Npc_HasItems(hero,ItAt_Shadow_02)
+	//*&& Npc_HasItems(hero,ItAt_Swampshark_02)
+	//*&& Npc_HasItems(hero,ItAt_Troll_02)
+	//*&& Npc_KnowsInfo(hero,Info_FreemineOrc_FIREWARAN2)
+	//*&& Npc_KnowsInfo(hero,Info_FreemineOrc_SHADOWBEAST2)
+	//*&& Npc_KnowsInfo(hero,Info_FreemineOrc_SWAMPSHARK2)
+	//*&& Npc_KnowsInfo(hero,Info_FreemineOrc_TROLL2))	if (!Npc_HasItems(hero,ItAt_Waran_01)
+
+	if (!Npc_KnowsInfo (hero, Info_FreemineOrc_EVERYULUMULU)) {
+		if ((Npc_KnowsInfo(hero,Info_FreemineOrc_FIREWARAN2))
+		&& (Npc_KnowsInfo(hero,Info_FreemineOrc_SHADOWBEAST2))
+		&& (Npc_KnowsInfo(hero,Info_FreemineOrc_SWAMPSHARK2))
+		&& (Npc_KnowsInfo(hero,Info_FreemineOrc_TROLL2)))
+		{
+			if ((!Npc_HasItems(hero,ItAt_Waran_01))
+			|| (!Npc_HasItems(hero,ItAt_Shadow_02))
+			|| (!Npc_HasItems(hero,ItAt_Swampshark_02))
+			|| (!Npc_HasItems(hero,ItAt_Troll_02)))
+			{
+				return TRUE;
+			};
+		};
 	};
 };
 

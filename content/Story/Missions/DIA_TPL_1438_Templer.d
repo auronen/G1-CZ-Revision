@@ -253,7 +253,10 @@ func void Tpl_1438_Templer_TEACHZANGEN_Info()
 //		B_LogEntry(GE_AnimalTrophies,"How to remove mandibles - minecrawlers");
 //		B_LogEntry(GE_AnimalTrophies,"Wissen über Zangen rausschneiden - Minecrawler");
 		B_LogEntry(GE_AnimalTrophies,"Jak vyříznout čelisti - důlní červi");
-		Tpl_1438_Templer_TEACHZANGEN.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*Tpl_1438_Templer_TEACHZANGEN.permanent = 0;
+
 //		PrintScreen("Learn: Cutting out minecrawlers' mandibles", -1,-1,"FONT_OLD_20_WHITE.TGA",2);
 //		PrintScreen("Lerne: Minecrawlerzangen rausschneiden", -1,-1,"FONT_OLD_20_WHITE.TGA",2);
 		PrintScreen("Naučil ses: Vyříznutí čelistí důlních červů", -1,-1,"FONT_OLD_20_WHITE.TGA",2); 

@@ -122,7 +122,14 @@ func void DIA_Fingers_BecomeShadow_TeachMe()
 // **************************************************
 // 						 Lehrer
 // **************************************************
-	var int Fingers_Wherecavalorn;
+var int Fingers_Wherecavalorn;
+/*
+#Bugfix #16 Player can skip level 1 training options for pickpocketing and picklocking and jump to level 2 immediately in DIA_Fingers_Lehrer.
+ - options will be restricted by level (lvl 1 can be learnt only on lvl 0, lvl 2 can be learnt only on lvl 1)
+ - dialogue will be available only when player can learn something
+ - dialog choice about Cavalorn will be available only once
+ - dialog choices will refresh with every action
+*/
 
 instance DIA_Fingers_Lehrer(C_INFO)
 {
@@ -140,7 +147,43 @@ func int DIA_Fingers_Lehrer_Condition()
 { 
 	if (Fingers_CanTeach == TRUE)
 	{
-		return 1; 
+		if ((Npc_GetTalentSkill (hero, NPC_TALENT_PICKPOCKET) < 2)
+		|| (Npc_GetTalentSkill (hero, NPC_TALENT_PICKLOCK) < 2)
+		|| ((Npc_GetTalentSkill (hero, NPC_TALENT_SNEAK) == 0) && (!Fingers_Wherecavalorn))) {
+			return 1; 
+		};
+	};
+};
+
+func void DIA_Fingers_Lehrer_Info_AddChoices () {
+	Info_ClearChoices(DIA_Fingers_Lehrer);
+	Info_AddChoice(DIA_Fingers_Lehrer,DIALOG_BACK ,DIA_Fingers_Lehrer_BACK);
+
+	//*Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPickpocket_2 , LPCOST_TALENT_PICKPOCKET_2,0),DIA_Fingers_Lehrer_Pickpocket2);
+	//*Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPickpocket_1 , LPCOST_TALENT_PICKPOCKET_1,0),DIA_Fingers_Lehrer_Pickpocket);
+	//*Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPicklock_2 , LPCOST_TALENT_PICKLOCK_2,0),DIA_Fingers_Lehrer_Lockpick2);
+	//*Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPicklock_1 , LPCOST_TALENT_PICKLOCK_1,0),DIA_Fingers_Lehrer_Lockpick);
+
+	if (Npc_GetTalentSkill (hero, NPC_TALENT_PICKPOCKET) == 1) {
+		Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPickpocket_2,LPCOST_TALENT_PICKPOCKET_2,0),DIA_Fingers_Lehrer_Pickpocket2);
+	};
+	if (Npc_GetTalentSkill (hero, NPC_TALENT_PICKPOCKET) == 0) {
+		Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPickpocket_1,LPCOST_TALENT_PICKPOCKET_1,0),DIA_Fingers_Lehrer_Pickpocket);
+	};
+	if (Npc_GetTalentSkill (hero, NPC_TALENT_PICKLOCK) == 1) {
+		Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPicklock_2, LPCOST_TALENT_PICKLOCK_2,0),DIA_Fingers_Lehrer_Lockpick2);
+	};
+	if (Npc_GetTalentSkill (hero, NPC_TALENT_PICKLOCK) == 0) {
+		Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPicklock_1, LPCOST_TALENT_PICKLOCK_1,0),DIA_Fingers_Lehrer_Lockpick);
+	};
+
+//	Info_AddChoice(DIA_Fingers_Lehrer,"I want to learn how to sneak around.",DIA_Fingers_Lehrer_Schleichen);
+//	Info_AddChoice(DIA_Fingers_Lehrer,"Ich will lernen, mich lautlos zu bewegen.",DIA_Fingers_Lehrer_Schleichen);
+	//*Info_AddChoice(DIA_Fingers_Lehrer,"Chci se naučit plížit.",DIA_Fingers_Lehrer_Schleichen);
+	if (Npc_GetTalentSkill (hero, NPC_TALENT_SNEAK) == 0) {
+		if (!Fingers_Wherecavalorn) {
+			Info_AddChoice(DIA_Fingers_Lehrer,"Chci se naučit plížit.",DIA_Fingers_Lehrer_Schleichen);
+		};
 	};
 };
 
@@ -153,15 +196,7 @@ func void DIA_Fingers_Lehrer_Info()
 //	AI_Output(self,other,"DIA_Fingers_Lehrer_05_02"); //Kommt drauf an, was willst du wissen?
 	AI_Output(self,other,"DIA_Fingers_Lehrer_05_02"); //To záleží na tom, co chceš umět.
 
-	Info_ClearChoices(DIA_Fingers_Lehrer);
-	Info_AddChoice(DIA_Fingers_Lehrer,DIALOG_BACK ,DIA_Fingers_Lehrer_BACK);
-	Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPickpocket_2 , LPCOST_TALENT_PICKPOCKET_2,0),DIA_Fingers_Lehrer_Pickpocket2);
-	Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPickpocket_1 , LPCOST_TALENT_PICKPOCKET_1,0),DIA_Fingers_Lehrer_Pickpocket);
-	Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPicklock_2 , LPCOST_TALENT_PICKLOCK_2,0),DIA_Fingers_Lehrer_Lockpick2);
-	Info_AddChoice(DIA_Fingers_Lehrer,B_BuildLearnString(NAME_LearnPicklock_1 , LPCOST_TALENT_PICKLOCK_1,0),DIA_Fingers_Lehrer_Lockpick);
-//	Info_AddChoice(DIA_Fingers_Lehrer,"I want to learn how to sneak around.",DIA_Fingers_Lehrer_Schleichen);
-//	Info_AddChoice(DIA_Fingers_Lehrer,"Ich will lernen, mich lautlos zu bewegen.",DIA_Fingers_Lehrer_Schleichen);
-	Info_AddChoice(DIA_Fingers_Lehrer,"Chci se naučit plížit.",DIA_Fingers_Lehrer_Schleichen);
+	DIA_Fingers_Lehrer_Info_AddChoices ();
 };
 
 func void DIA_Fingers_Lehrer_Schleichen()
@@ -176,6 +211,8 @@ func void DIA_Fingers_Lehrer_Schleichen()
 //	AI_Output(self,other,"DIA_Fingers_Lehrer_Schleichen_05_02"); //Aber wenn es darum geht, zu lernen, wie man sich leise bewegt, ist Cavalorn der bessere Mann für dich!
 	AI_Output(self,other,"DIA_Fingers_Lehrer_Schleichen_05_02"); //Ale jestli se chceš naučit plížit, je Cavalorn lepší volba než já!
 	Fingers_Wherecavalorn = TRUE;
+
+	DIA_Fingers_Lehrer_Info_AddChoices ();
 };
 
 func void DIA_Fingers_Lehrer_Lockpick()
@@ -196,6 +233,8 @@ func void DIA_Fingers_Lehrer_Lockpick()
 //		AI_Output(self,other,"DIA_Fingers_Lehrer_Lockpick_05_03"); //Wenn du in Zukunft mit weniger Gewalt an die Sache rangehst, wirst du merken, dass du weniger Dietriche verbrauchst!
 		AI_Output(self,other,"DIA_Fingers_Lehrer_Lockpick_05_03"); //Pokud budeš k zámkům přistupovat s menší silou, zjistíš, že nepotřebuješ tolik paklíčů.
 	};
+
+	DIA_Fingers_Lehrer_Info_AddChoices ();
 };
 
 func void DIA_Fingers_Lehrer_Lockpick2()
@@ -216,6 +255,8 @@ func void DIA_Fingers_Lehrer_Lockpick2()
 //		AI_Output(self,other,"DIA_Fingers_Lehrer_Lockpick2_05_03"); //Ein Meister des Fachs hat eine gute Chance, eine Truhe zu öffnen, ohne dass sein Dietrich überhaupt abbricht.
 		AI_Output(self,other,"DIA_Fingers_Lehrer_Lockpick2_05_03"); //Odborník v tomto oboru má velkou šanci, že odemkne turhlici, aniž by zlomil jediný paklíč.
 	};
+
+	DIA_Fingers_Lehrer_Info_AddChoices ();
 };
 
 func void DIA_Fingers_Lehrer_Pickpocket()
@@ -247,6 +288,8 @@ func void DIA_Fingers_Lehrer_Pickpocket()
 //		AI_Output(self,other,"DIA_Fingers_lehrer_Pickpocket_05_05"); //Vergiss es! Ohne dass du schleichen kannst, wirst du NIEMALS ein geschickter Dieb.
 		AI_Output(self,other,"DIA_Fingers_lehrer_Pickpocket_05_05"); //Zapomeň na to! Nikdy z tebe nebude zkušený zloděj, dokud se nebudeš umět plížit.
 	};
+
+	DIA_Fingers_Lehrer_Info_AddChoices ();
 };
 
 func void DIA_Fingers_Lehrer_Pickpocket2()
@@ -267,6 +310,8 @@ func void DIA_Fingers_Lehrer_Pickpocket2()
 //		AI_Output(self,other,"DIA_Fingers_Lehrer_Pickpocket2_05_03"); //Also pass auf dich auf.
 		AI_Output(self,other,"DIA_Fingers_Lehrer_Pickpocket2_05_03"); //Opatruj se.
 	};
+
+	DIA_Fingers_Lehrer_Info_AddChoices ();
 };
 
 func void DIA_Fingers_Lehrer_BACK()

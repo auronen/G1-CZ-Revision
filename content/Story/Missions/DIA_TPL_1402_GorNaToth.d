@@ -510,7 +510,9 @@ func void TPL_1402_GorNaToth_TRAIN_Info()
 //		AI_Output(self,other,"TPL_1402_GorNaToth_TRAIN_11_07"); //But the further you progress, the better you get.
 //		AI_Output(self,other,"TPL_1402_GorNaToth_TRAIN_11_07"); //Aber je weiter du fortschreitest, desto besser wird diese Fähigkeit.
 		AI_Output(self,other,"TPL_1402_GorNaToth_TRAIN_11_07"); //Ale čím více budeš trénovat, tím větší šanci budeš mít.
-		TPL_1402_GorNaToth_TRAIN.permanent = 0;
+		
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*TPL_1402_GorNaToth_TRAIN.permanent = 0;
 
 		AI_StopProcessInfos(self);
 		B_PracticeCombat ("PSI_PATH_6_7");
@@ -561,7 +563,9 @@ func void TPL_1402_GorNaToth_TRAINAGAIN_Info()
 //		AI_Output(self,other,"TPL_1402_GorNaToth_TRAINAGAIN_Info_11_05"); //Und wieder von vorne. Vergiss nicht, Übung macht den Meister. Also, geh jetzt und werde ein wahrer Meister des einhändigen Kampfes.
 		AI_Output(self,other,"TPL_1402_GorNaToth_TRAINAGAIN_Info_11_05"); //A znovu kupředu. Nezapomeň, cvičení dělá mistra. Tak běž a staň se mistrem jednoručních zbraní.
 		B_GiveInvItems(hero,self,ItMiNugget, 50);
-		TPL_1402_GorNaToth_TRAINAGAIN.permanent = 0;
+		
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze sa dialog rusi v condition funkcii
+		//*TPL_1402_GorNaToth_TRAINAGAIN.permanent = 0;
 
 		AI_StopProcessInfos(self);
 		B_PracticeCombat ("PSI_PATH_6_7");

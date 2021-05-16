@@ -1,5 +1,4 @@
 // ************************ EXIT **************************
-
 instance VLK_585_Aleph_Exit(C_INFO)
 {
 	npc = VLK_585_Aleph;
@@ -18,7 +17,7 @@ func int VLK_585_Aleph_Exit_Condition()
 
 func void VLK_585_Aleph_Exit_Info()
 {
-	if !Npc_KnowsInfo(hero,GRD_261_Brandick_ALEPH)
+	if (!Npc_KnowsInfo(hero,GRD_261_Brandick_ALEPH))
 	{
 //		AI_Output(other,self,"VLK_585_Aleph_Exit_Info_15_01"); //Good luck!
 //		AI_Output(other,self,"VLK_585_Aleph_Exit_Info_15_01"); //Viel Glück noch.
@@ -53,8 +52,8 @@ func void VLK_585_Aleph_CLEVER_Info()
 //	AI_Output(self,other,"VLK_585_Aleph_CLEVER_Info_05_01"); //Hehehe, die Wachen erwischen mich nie!
 	AI_Output(self,other,"VLK_585_Aleph_CLEVER_Info_05_01"); //Hehehe, stráže mě nikdy nedostanou!
 };
-// ***************** ALEPH ERKLÄRT SEINE ARBEITSHALTUNG *****************************
 
+// ***************** ALEPH ERKLÄRT SEINE ARBEITSHALTUNG *****************************
 instance VLK_585_Aleph_GUARDS(C_INFO)
 {
 	npc = VLK_585_Aleph;
@@ -69,7 +68,7 @@ instance VLK_585_Aleph_GUARDS(C_INFO)
 
 func int VLK_585_Aleph_GUARDS_Condition()
 { 
-	if Npc_KnowsInfo(hero,VLK_585_Aleph_CLEVER) 
+	if (Npc_KnowsInfo(hero,VLK_585_Aleph_CLEVER))
 	{
 		return 1;
 	};
@@ -100,8 +99,8 @@ func void VLK_585_Aleph_GUARDS_Info()
 	Npc_ExchangeRoutine(Brandick,"WATCH");
 	AI_ContinueRoutine(Brandick); // TEST!!!
 };
-// ***************** ALEPH BIETET INFO *****************************
 
+// ***************** ALEPH BIETET INFO *****************************
 instance VLK_585_Aleph_INFO(C_INFO)
 {
 	npc = VLK_585_Aleph;
@@ -116,7 +115,7 @@ instance VLK_585_Aleph_INFO(C_INFO)
 
 func int VLK_585_Aleph_INFO_Condition()
 {
-	if (Npc_HasItems(hero,ItMinugget)) >= 10 && (Npc_KnowsInfo(hero,VLK_585_Aleph_GUARDS)) 
+	if ((Npc_HasItems(hero,ItMinugget)) >= 10 && (Npc_KnowsInfo(hero,VLK_585_Aleph_GUARDS)))
 	{
 		return 1;
 	};
@@ -142,6 +141,7 @@ func void VLK_585_Aleph_INFO_Info()
 
 	B_GiveInvItems(hero,other,ItMiNugget,10);
 };
+
 // ***************** WIRD ALEPH ANGESCHWÄRZT IST ER SAUER*****************************
 instance VLK_585_Aleph_ANGRY(C_INFO)
 {
@@ -168,8 +168,10 @@ func void VLK_585_Aleph_ANGRY_Info()
 	AI_Output(self,other,"VLK_585_Aleph_ANGRY_Info_05_01"); //Tys mě prozradil Brandickovi? Ztrať se!
 
 	AI_StopProcessInfos(self);
+	//#Needs_Attention toto nema v hre ziadny zmysel :)
 	Npc_SetTempAttitude(self,ATT_ANGRY);
 };
+
 //***************** LOCKPICKS*****************************
 instance VLK_585_Aleph_KEY(C_INFO)
 {
@@ -182,9 +184,10 @@ instance VLK_585_Aleph_KEY(C_INFO)
 //	description     = "Hast du noch ein paar nützliche Informationen?";
 	description     = "Máš ještě nějaké užitečné informace?";
 };
+
 func int VLK_585_Aleph_KEY_Condition()
 {
-	if ! (Npc_KnowsInfo(hero,GRD_261_Brandick_ALEPH)) && (Npc_KnowsInfo(hero,VLK_585_Aleph_INFO))
+	if ((!Npc_KnowsInfo(hero,GRD_261_Brandick_ALEPH)) && (Npc_KnowsInfo(hero,VLK_585_Aleph_INFO)))
 	{
 		return 1;
 	};
@@ -212,6 +215,7 @@ instance VLK_585_Aleph_GLEN(C_INFO)
 //	description     = "(10 Erz geben)";
 	description     = "Za tuhle rudu očekávám dobré informace! (10 nugetů)";
 };
+
 func int VLK_585_Aleph_GLEN_Condition()
 {
 	if (Npc_HasItems(hero,ItMinugget)) >= 10 && (Npc_KnowsInfo(hero,VLK_585_Aleph_KEY))
@@ -232,6 +236,7 @@ func void VLK_585_Aleph_GLEN_Info()
 
 	B_GiveInvItems(hero,self,ItMinugget,10); 
 };
+
 //***************** LAGERSCHUPPENSCHLÜSSEL*****************************
 func void B_Aleph_StorageShedKey()
 {
@@ -240,22 +245,45 @@ func void B_Aleph_StorageShedKey()
 	B_LogEntry(CH2_StorageShed,"Aleph mi prodal klíč od truhlic ve skladu!");
 };
 
+/*
+#Bugfix #5 DIA_VLK_585_Aleph.d Fixing several issues with dialogues VLK_585_Aleph_SCHUPPEN, VLK_585_Aleph_DIRTY, they are changing permanent property (permanent property can't be changed) and allow item duplication for ItKe_OM_03, Staerkering.
+
+Problem #1 - incorrect use of permanent property
+	both instances VLK_585_Aleph_SCHUPPEN and VLK_585_Aleph_DIRTY have oCInfo.permanent = 0
+	 - when you talk to Aleph and you don't have enough ore to buy key, script changes permanent to 1
+	 - but this does not work, permanent value is not saved in game save, if you save/reload dialogues wont be available
+
+Problem #2 - item duplication
+	NPC VLK_585_Aleph has in its inventory both items: ItKe_OM_03, Staerkering
+	- if you beat him - take these 2 items, then in this dialog VLK_585_Aleph_SCHUPPEN both will be duplicated and given to player
+	- if you tell Brandick about Aleph, dialog VLK_585_Aleph_DIRTY will be available - it will create 1 more key ItKe_OM_03
+
+Solution
+	Change both VLK_585_Aleph_SCHUPPEN, VLK_585_Aleph_DIRTY oCInfo.permanent = 1
+	 - add condition, in which dialogues will be available only when Aleph has the key in his inventory
+
+*/
 instance VLK_585_Aleph_SCHUPPEN(C_INFO)
 {
 	npc = VLK_585_Aleph;
 	condition = VLK_585_Aleph_SCHUPPEN_Condition;
 	information = VLK_585_Aleph_SCHUPPEN_Info;
 	important = 0;
-	permanent = 0;
+	//*permanent = 0;
+	permanent = 1;
 //	description     = "Do you know anything about the key to the chests in the storage shed??";
 //	description     = "Weißt du was über den Schlüssel für die Truhen im Lagerschuppen?";
 	description     = "Víš něco o klíči od těch truhel ve skladu?";
 };
+
 func int VLK_585_Aleph_SCHUPPEN_Condition()
 {
 	if (Npc_KnowsInfo(hero,GRD_271_ULBERT_DRUNK)) && ( !Npc_KnowsInfo(hero,GRD_261_Brandick_ALEPH))
 	{
-		return 1;
+		//*return 1;
+		if (NPC_HasItems (self, ItKe_OM_03) > 0) {
+			return 1;
+		};
 	};
 };
 
@@ -277,7 +305,7 @@ func void VLK_585_Aleph_SCHUPPEN_Info()
 
 	Info_ClearChoices(VLK_585_Aleph_SCHUPPEN);
 
-	Info_AddChoice(VLK_585_Aleph_SCHUPPEN,DIALOG_BACK    ,VLK_585_Aleph_SCHUPPEN_Back);
+	Info_AddChoice(VLK_585_Aleph_SCHUPPEN,DIALOG_BACK, VLK_585_Aleph_SCHUPPEN_Back);
 //	Info_AddChoice(VLK_585_Aleph_SCHUPPEN,"Pay 50 ore.",VLK_585_Aleph_SCHUPPEN_50);
 //	Info_AddChoice(VLK_585_Aleph_SCHUPPEN,"50 Erz zahlen",VLK_585_Aleph_SCHUPPEN_50);
 	Info_AddChoice(VLK_585_Aleph_SCHUPPEN,"50 nugetů by ti mělo víc než stačit!",VLK_585_Aleph_SCHUPPEN_50);
@@ -291,32 +319,51 @@ func void VLK_585_Aleph_SCHUPPEN_Info()
 
 func void VLK_585_Aleph_SCHUPPEN_50()
 {
-
 	if (Npc_HasItems(hero,ItMiNugget) >= 50)
 	{ 
 //		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_50_15_01"); //50 ore should be more than enough for you!
 //		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_50_15_01"); //50 Erz sind mehr als genug für dich!
 		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_50_15_01"); //50 nugetů by ti mělo víc než stačit!
-//		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02"); //Very generous! Here's the key. And take this ring as well. It's always brought good luck to me.
-//		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02"); //Überaus großzügig. Hier ist der Schlüssel. Und nimm auch diesen Ring. Mir hat er immer Glück gebracht.
-		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02"); //Jak šlechetné! Tady je klíč. A ten prsten si vezmi taky. Mně vždycky přináší štěstí.
 
-		CreateInvItems(self,ItKe_OM_03,1); // nur für die korrekte Textausgaben!!!
-		B_GiveInvItems(self,hero,ItKe_OM_03, 2);
-		Npc_RemoveInvItem(hero,ItKe_OM_03);
+		//--> #Bugfix #5
+		//We will add 1 more condition here - only when Aleph has both key and ring he can tell you that he gives you both (obviously :)
+		if (NPC_HasItems (self, Staerkering) > 0) {
+//			AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02"); //Very generous! Here's the key. And take this ring as well. It's always brought good luck to me.
+//			AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02"); //Überaus großzügig. Hier ist der Schlüssel. Und nimm auch diesen Ring. Mir hat er immer Glück gebracht.
+			AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02"); //Jak šlechetné! Tady je klíč. A ten prsten si vezmi taky. Mně vždycky přináší štěstí.
 
-		//#Needs_Attention toto je bug - ak hrac zmlati Alepha a zoberie mu prsten tak sa tu vygeneruje druhy prsten
-		Npc_RemoveInvItem(self,Staerkering);
-		CreateInvItem(hero,Staerkering);
+			//*CreateInvItems(self,ItKe_OM_03,1); // nur für die korrekte Textausgaben!!!
+			//*B_GiveInvItems(self,hero,ItKe_OM_03, 2);
+			//*Npc_RemoveInvItem(hero,ItKe_OM_03);
+			Npc_RemoveInvItem (self, ItKe_OM_03);
+			CreateInvItem (hero, ItKe_OM_03);
+			AI_PlayerReceivedItems (ItKe_OM_03, 1);
 
-		B_GiveInvItems(hero,self,ItMinugget,50);  
+			//*Npc_RemoveInvItem(self,Staerkering);
+			//*CreateInvItem(hero,Staerkering);
+			Npc_RemoveInvItem (self, Staerkering);
+			CreateInvItem (hero, Staerkering);
+			AI_PlayerReceivedItems (Staerkering, 1);
+			
+			Npc_SetPermAttitude (self, ATT_FRIENDLY);
+		} else {
+			//If Aleph does not have ring ... he will just tell us about key (we use existing dialogue here)
+//			AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02"); //Alright, I happen to have the key here.
+//			AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02"); //Nun gut, zufällig habe ich hier einen Schlüssel.
+			AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02"); //Dobře, náhodou mám ten klíč sebou.
 
-		Npc_SetPermAttitude(self,ATT_FRIENDLY); 
+			Npc_RemoveInvItem (self, ItKe_OM_03);
+			CreateInvItem (hero, ItKe_OM_03);
+			AI_PlayerReceivedItems (ItKe_OM_03, 1);
+		};
+
+		//*B_GiveInvItems(hero,self,ItMinugget,50);  
+		Npc_RemoveInvItems (hero, ItMinugget, 50);
+		CreateInvItem (self, ItMinugget, 50);
+		AI_PlayerGaveItems (ItMinugget, 50);
+
 		Info_ClearChoices(VLK_585_Aleph_SCHUPPEN);
-		//#Needs_Attention toto zahravanie sa s permanent property ... to sposobuje problemy pri Save/Loade dialog moze zmiznut
-		//Najlepsie by bolo zmenit dialog na permanent a pridat premennu, ktora vyrusi dialog ak hrac ziskal kluc
-		//+ nezabudnut upravit podmienku u dialogu VLK_585_Aleph_DIRTY
-		VLK_585_Aleph_SCHUPPEN.permanent = 0;
+		//*VLK_585_Aleph_SCHUPPEN.permanent = 0;
 		B_Aleph_StorageShedKey();
 	}
 	else
@@ -324,18 +371,26 @@ func void VLK_585_Aleph_SCHUPPEN_50()
 //		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_03"); //You don't have that much ore!
 //		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_03"); //So viel Erz hast du nicht!
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_03"); //Tolik rudy nemáš!
-		VLK_585_Aleph_SCHUPPEN.permanent = 1;
+		//*VLK_585_Aleph_SCHUPPEN.permanent = 1;
 	};
 };
 
 func void VLK_585_Aleph_SCHUPPEN_30()
 {
-
 	if (Npc_HasItems(hero,ItMiNugget) >= 30)
 	{ 
-		CreateInvItem(self,ItKe_OM_03);
-		B_GiveInvItems(self,other,ItKe_OM_03,1);
-		B_GiveInvItems(hero,self,ItMinugget,30);  
+		//*CreateInvItem(self,ItKe_OM_03);
+		//*B_GiveInvItems(self,other,ItKe_OM_03,1);
+
+		Npc_RemoveInvItem (self, ItKe_OM_03);
+		CreateInvItem (hero, ItKe_OM_03);
+		AI_PlayerReceivedItems (ItKe_OM_03, 1);
+
+		//*B_GiveInvItems(hero,self,ItMinugget,30);
+		Npc_RemoveInvItems (hero, ItMinugget, 30);
+		CreateInvItem (self, ItMinugget, 30);
+		AI_PlayerGaveItems (ItMinugget, 30);
+			
 		Info_ClearChoices(VLK_585_Aleph_SCHUPPEN);
 //		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_30_15_01"); //30 ore should be enough.
 //		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_30_15_01"); //30 Erz sollten reichen.
@@ -343,7 +398,7 @@ func void VLK_585_Aleph_SCHUPPEN_30()
 //		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02"); //Alright, I happen to have the key here.
 //		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02"); //Nun gut, zufällig habe ich hier einen Schlüssel.
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02"); //Dobře, náhodou mám ten klíč sebou.
-		VLK_585_Aleph_SCHUPPEN.permanent = 0;
+		//*VLK_585_Aleph_SCHUPPEN.permanent = 0;
 		B_Aleph_StorageShedKey();
 	}
 	else
@@ -351,9 +406,10 @@ func void VLK_585_Aleph_SCHUPPEN_30()
 //		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_03"); //You don't have that much ore.
 //		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_03"); //So viel Erz hast du nicht!
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_03"); //Tolik rudy nemáš!
-		VLK_585_Aleph_SCHUPPEN.permanent = 1;
+		//*VLK_585_Aleph_SCHUPPEN.permanent = 1;
 	}; 
-}; 
+};
+
 func void VLK_585_Aleph_SCHUPPEN_15()
 {
 //	AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_15_15_01"); //Is 15 ore alright with you?
@@ -362,12 +418,13 @@ func void VLK_585_Aleph_SCHUPPEN_15()
 //	AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_15_05_02"); //15 ore? I don't know anything about a key!
 //	AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_15_05_02"); //15 Erz? Ich weiß nichts von einem Schlüssel!
 	AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_15_05_02"); //15 nugetů? Já o žádném klíči nic nevím!
-	VLK_585_Aleph_SCHUPPEN.permanent = 0;
-}; 
+	//*VLK_585_Aleph_SCHUPPEN.permanent = 0;
+};
+
 func void VLK_585_Aleph_SCHUPPEN_Back()
 {
 	Info_ClearChoices(VLK_585_Aleph_SCHUPPEN);
-	VLK_585_Aleph_SCHUPPEN.permanent = 1;
+	//*VLK_585_Aleph_SCHUPPEN.permanent = 1;
 };
 
 // WENN DER SPIELER ALEPH BEI BRANDICK ANGESCHWÄRZT HAT
@@ -377,7 +434,8 @@ instance VLK_585_Aleph_DIRTY(C_INFO)
 	condition = VLK_585_Aleph_DIRTY_Condition;
 	information = VLK_585_Aleph_DIRTY_Info;
 	important = 0;
-	permanent = 0;
+	//*permanent = 0;
+	permanent = 1;
 //	description = "Do you know anything about the key for the chests in the storage shed??"; 
 //	description = "Weißt du was über den Schlüssel für die Truhen im Lagerschuppen?"; 
 	description = "Víš něco o klíči od těch truhel ve skladu?"; 
@@ -385,11 +443,11 @@ instance VLK_585_Aleph_DIRTY(C_INFO)
 
 func int VLK_585_Aleph_DIRTY_Condition()
 {
-	if (Npc_KnowsInfo(hero,GRD_271_ULBERT_DRUNK)) && (Npc_KnowsInfo(hero,GRD_261_Brandick_ALEPH))
-	//#Bugfix this dialog should not be available if player already got key from Aleph in dialog VLK_585_Aleph_SCHUPPEN
-	&& (!Npc_KnowsInfo (hero, VLK_585_Aleph_SCHUPPEN))
+	if ((Npc_KnowsInfo (hero, GRD_271_ULBERT_DRUNK)) && (Npc_KnowsInfo (hero, GRD_261_Brandick_ALEPH)))
 	{
-		return 1;
+		if (NPC_HasItems (self, ItKe_OM_03) > 0) {
+			return 1;
+		};
 	};
 };
 
@@ -400,7 +458,7 @@ func void VLK_585_Aleph_DIRTY_Info()
 	AI_Output(other,self,"VLK_585_Aleph_DIRTY_Info_15_01"); //Víš něco o klíči od těch truhel ve skladu?
 //	AI_Output(self,other,"VLK_585_Aleph_DIRTY_Info_05_02"); //Well, that depends...
 //	AI_Output(self,other,"VLK_585_Aleph_DIRTY_Info_05_02"); //Nun, das kommt ganz darauf an ...
-	AI_Output(self,other,"VLK_585_Aleph_DIRTY_Info_05_02"); //No , to záleží na...
+	AI_Output(self,other,"VLK_585_Aleph_DIRTY_Info_05_02"); //No, to záleží na...
 //	AI_Output(other,self,"VLK_585_Aleph_DIRTY_Info_15_03"); //On how much ore I'll give you?
 //	AI_Output(other,self,"VLK_585_Aleph_DIRTY_Info_15_03"); //Darauf, wieviel Erz ich dir gebe?
 	AI_Output(other,self,"VLK_585_Aleph_DIRTY_Info_15_03"); //Na tom, kolik nugetů ti dám?
@@ -416,22 +474,32 @@ func void VLK_585_Aleph_DIRTY_Info()
 //	Info_AddChoice(VLK_585_Aleph_DIRTY,"(Don't pay)",VLK_585_Aleph_DIRTY_NO);
 //	Info_AddChoice(VLK_585_Aleph_DIRTY,"(Nicht zahlen)",VLK_585_Aleph_DIRTY_NO);
 	Info_AddChoice(VLK_585_Aleph_DIRTY,"Nemůžu vyhodit 100 nugetů!",VLK_585_Aleph_DIRTY_NO);
-};  
+};
+
 func void VLK_585_Aleph_DIRTY_100()
 {
-	if Npc_HasItems(hero,ItMinugget)>=100
+	if (Npc_HasItems(hero, ItMinugget) >= 100)
 	{ 
 //		AI_Output(other,self,"VLK_585_Aleph_DIRTY_100_Info_15_01"); //Alright, you crook. Here are 100 ore.
 //		AI_Output(other,self,"VLK_585_Aleph_DIRTY_100_Info_15_01"); //Na gut, du Halsabschneider. Hier sind deine 100 Erz.
 		AI_Output(other,self,"VLK_585_Aleph_DIRTY_100_Info_15_01"); //Dobrá, ty vyděrači. Tady je 100 nugetů.
+		//*B_GiveInvItems(hero,self,ItMinugget,100);
+		Npc_RemoveInvItems (hero, ItMinugget, 100);
+		CreateInvItem (self, ItMinugget, 100);
+		AI_PlayerGaveItems (ItMinugget, 100);
+
 //		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_02"); //You shouldn't have grassed me up. Here's the key.
 //		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_02"); //Du hättest mich halt nicht verpfeifen sollen. Hier ist der Schlüssel.
 		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_02"); //Neměl jsi mě prásknout. Tady je ten klíč.
-		B_GiveInvItems(hero,self,ItMinugget,100);
-		CreateInvItem(self,ItKe_OM_03);
-		B_GiveInvItems(self,other,ItKe_OM_03,1);
+
+		//*CreateInvItem(self,ItKe_OM_03);
+		//*B_GiveInvItems(self,other,ItKe_OM_03,1);
+		Npc_RemoveInvItem (self, ItKe_OM_03);
+		CreateInvItem (hero, ItKe_OM_03);
+		AI_PlayerReceivedItems (ItKe_OM_03, 1);
+		
 		Info_ClearChoices(VLK_585_Aleph_DIRTY);
-		VLK_585_Aleph_DIRTY.permanent = 0; 
+		//*VLK_585_Aleph_DIRTY.permanent = 0; 
 		B_Aleph_StorageShedKey();
 	}
 	else
@@ -439,9 +507,10 @@ func void VLK_585_Aleph_DIRTY_100()
 //		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_03"); //Do you think I'm stupid or what? 100 ore, and not a nugget less!
 //		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_03"); //Für wie blöd hältst du mich eigentlich? 100 Erz, nicht einen Brocken weniger!
 		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_03"); //Myslíš, že jsem tak hloupý nebo co? 100 nugetů a ani o jeden míň!
-		VLK_585_Aleph_DIRTY.permanent = 1;
+		//*VLK_585_Aleph_DIRTY.permanent = 1;
 	};
 };
+
 func void VLK_585_Aleph_DIRTY_NO()
 {
 //	AI_Output(other,self,"VLK_585_Aleph_DIRTY_NO_Info_15_01"); //I'm not gonna throw 100 ore at you!
@@ -450,5 +519,5 @@ func void VLK_585_Aleph_DIRTY_NO()
 //	AI_Output(self,other,"VLK_585_Aleph_DIRTY_NO_Info_05_02"); //Hey, it's you who constantly starts talking to me!
 //	AI_Output(self,other,"VLK_585_Aleph_DIRTY_NO_Info_05_02"); //Hey, immerhin bist du derjenige, der mich die ganze Zeit anquatscht!
 	AI_Output(self,other,"VLK_585_Aleph_DIRTY_NO_Info_05_02"); //Hej, ty mě v jednom kuse přemlouváš!
-	VLK_585_Aleph_DIRTY.permanent = 0; 
+	//*VLK_585_Aleph_DIRTY.permanent = 0; 
 };

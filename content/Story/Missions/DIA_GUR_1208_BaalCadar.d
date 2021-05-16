@@ -329,7 +329,9 @@ func void Gur_1208_BaalCadar_KREIS1_Info()
 //		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_06"); //The moment they obeyed the Sleeper's call, the First Circle was born. The magic of the runes will be understood by anybody who follows the Sleeper.
 //		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_06"); //In dem Augenblick, als sie dem Ruf des Schläfers folgten, entstand der erste Kreis. Die Magie der Runen offenbart sich demjenigen, der dem Schläfer folgt.
 		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_06"); //V okamžiku, kdy vyslyšeli Spáčovo poselství, se zrodil první kruh. Magie run je k dispozici každému, kdo následuje Spáče.
-		Gur_1208_BaalCadar_KREIS1.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po nauceni skillu NPC_TALENT_MAGE sa dialog rusi v condition funkcii
+		//*Gur_1208_BaalCadar_KREIS1.permanent = 0;
 	};
 	AI_StopProcessInfos(self);
 
@@ -382,7 +384,9 @@ func void Gur_1208_BaalCadar_KREIS2_Info()
 //		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS2_Info_02_06"); //The Second Circle was born.
 //		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS2_Info_02_06"); //Das war die Geburtsstunde des zweiten Kreises.
 		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS2_Info_02_06"); //Tak se zrodil druhý kruh.
-		Gur_1208_BaalCadar_KREIS2.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po nauceni skillu NPC_TALENT_MAGE sa dialog rusi v condition funkcii
+		//*Gur_1208_BaalCadar_KREIS2.permanent = 0;
 	};
 	AI_StopProcessInfos(self);
 };
@@ -485,7 +489,9 @@ func void Gur_1208_BaalCadar_KREIS4_Info()
 //		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS4_Info_02_06"); //Now you know everything a brother needs to know about magic. You have been a good student.
 //		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS4_Info_02_06"); //Du weißt nun alles, was ein Bruder über Magie wissen muss. Du warst ein gelehriger Schüler.
 		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS4_Info_02_06"); //Teď víš všechno, co bratr potřebuje o kouzlech vědět. Byl jsi dobrý žák.
-		Gur_1208_BaalCadar_KREIS4.permanent = 0;
+
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po nauceni skillu NPC_TALENT_MAGE sa dialog rusi v condition funkcii
+		//*Gur_1208_BaalCadar_KREIS4.permanent = 0;
 	};
 
 };

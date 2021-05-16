@@ -2,11 +2,8 @@
 //					EXIT 
 // **************************************
 /*
-	#Bugfix duplicitny dialog
-		GRD_245_Gardist.NpcType == npctype_guard
-		GRD_245_Gardist.voice == 13
-	
-	Ma priradeny exit dialog skrz B_AssignAmbientInfos > B_AssignAmbientInfos_Grd_13 > Info_grd_13_EXIT
+
+#Bugfix #2 DIA_GRD_245_Exit commented out, this NPC has 'exit' dialogue already assigned through B_AssignAmbientInfos > B_AssignAmbientInfos_Grd_13 > Info_grd_13_EXIT (GRD_245_Gardist.NpcType == npctype_guard, GRD_245_Gardist.voice == 13)
 
 instance DIA_GRD_245_Exit(C_INFO)
 {

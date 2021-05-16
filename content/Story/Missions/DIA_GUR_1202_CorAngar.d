@@ -233,7 +233,8 @@ func void GUR_1202_CorAngar_WANNABETPL_Info()
 //		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_02"); //You are not yet ready. You can join us as soon as you've gathered more experience.
 //		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_02"); //Du bist noch nicht bereit. Wenn du erfahrener geworden bist, werde ich dich aufnehmen.
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_02"); //Nejsi ještě připraven. Můžeš se k nám připojit, jakmile získáš víc zkušeností.
-		GUR_1202_CorAngar_WANNABETPL.permanent = 1;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po zmene guildy sa dialog rusi v condition funkcii
+		//*GUR_1202_CorAngar_WANNABETPL.permanent = 1;
 	}
 	else if (hero.level >= 10)
 	{
@@ -255,14 +256,15 @@ func void GUR_1202_CorAngar_WANNABETPL_Info()
 //		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_08"); //Now go to Gor Na Toth at the training ground. He'll give you new armor.
 //		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_08"); //Gehe nun zu Gor Na Toth am Übungsplatz. Er wird dir deine neue Rüstung geben.
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_08"); //Teď jdi na cvičiště za Gor Na Tothem. Dá ti novou zbroj.
-		GUR_1202_CorAngar_WANNABETPL.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po zmene guildy sa dialog rusi v condition funkcii
+		//*GUR_1202_CorAngar_WANNABETPL.permanent = 0;
 		Npc_SetTrueGuild(hero,GIL_TPL);
 		hero.guild = GIL_TPL;
 
 		Log_CreateTopic(GE_BecomeTemplar,LOG_NOTE);
 //		B_LogEntry(GE_BecomeTemplar,"Today Cor Angar has appointed me a templar. Gor Na Toth will hand me over my new armor. He's usually at the training ground.");
 //		B_LogEntry(GE_BecomeTemplar,"Heute hat mich Cor Angar zu einem Templer ernannt. Gor Na Toth soll mir meine neue Rüstung überreichen. Er hält sich normalerweise am Übungsplatz auf.");
-		B_LogEntry(GE_BecomeTemplar,"Dnes mě Cor Kalom pasoval na templáře. Gor Na Toth mi předá moji novou zbroj. Obvykle bývá na cvičišti.");
+		B_LogEntry(GE_BecomeTemplar,"Dnes mě Cor Angar pasoval na templáře. Gor Na Toth mi předá moji novou zbroj. Obvykle bývá na cvičišti.");
 		Log_CreateTopic(GE_TeacherPSI,LOG_NOTE);
 //		B_LogEntry(GE_TeacherPSI,"Cor Angar teaches STRENGTH, DEXTERITY and TWO-HANDED fighting. He'll only teach me the last once I'm a master of ONE-HANDED fighting. He's usually to be found at the templars' training ground on the second level of the catwalks.");
 //		B_LogEntry(GE_TeacherPSI,"Cor Angar unterrichtet STÄRKE, GESCHICK und den ZWEIHÄNDIGEN Kampf. Diesen aber nur, wenn ich im EINHÄNDIGEN Kampf gemeistert bin. Man kann ihn normalerweise auf dem Übungsplatz der Templer auf der zweiten Stegebene finden.");
@@ -316,8 +318,8 @@ func void GUR_1202_CorAngar_ZWEIHAND1_Info()
 //		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_05"); //Konzentration ist der Schlüssel. Körper und Geist verschmelzen in Konzentration zusammen.
 		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_05"); //Klíčem úspěchu je soustředění. Soustředěná jednota těla a mysli.
 
-		//#Needs_Attention - tato metoda zmeny permanent si myslim nefunguje - TODO: otestovat
-		GUR_1202_CorAngar_ZWEIHAND1.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po nauceni skillu NPC_TALENT_2H sa dialog rusi v condition funkcii
+		//*GUR_1202_CorAngar_ZWEIHAND1.permanent = 0;
 
 		AI_StopProcessInfos(self);
 		B_PracticeCombat ("PSI_PATH_6_7");
@@ -377,7 +379,8 @@ func void GUR_1202_CorAngar_ZWEIHAND2_Info()
 //		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_08"); //Setze dein Talent mit Vorsicht ein. Und denke daran: Wer den Kampf fordert, kommt durch den Kampf um.
 		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_08"); //Využívej své umění obezřetně. A zapamatuj si: vyprovokovat boj znamená totéž, co v něm zemřít.
 
-		GUR_1202_CorAngar_ZWEIHAND2.permanent = 0;
+		//#Needs_Attention - zmena permanent nefunguje + je tu zbytocne, pretoze po nauceni skillu NPC_TALENT_2H sa dialog rusi v condition funkcii
+		//*GUR_1202_CorAngar_ZWEIHAND2.permanent = 0;
 
 		AI_StopProcessInfos(self);
 		B_PracticeCombat ("PSI_PATH_6_7");
